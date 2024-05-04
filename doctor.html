@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Doctor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Book a Doctor</h1>
+            <div class="top-section">
+                <div class="emergency-info">
+                    <p class="call-now">Emergency Call Now! <br> +123-456-7890</p>
+                </div>
+                <div class="emergency-info">
+                    <p class="availability">Available 24/7</p>
+                </div>
+                <div class="book-doctor-container">
+                    <a href="#" class="book-doctor">BOOK A DOCTOR?</a>
+                </div>
+                <div class="check-availability-container">
+                    <button id="checkAvailabilityBtn" class="check-availability">Check for Availability of Doctor</button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="path/to/your/logo.png" alt="">
+            </a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="doctor-info">
+                <h2>Doctors Near You</h2>
+                <table id="doctorTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Degree</th>
+                            <th>Experience</th>
+                            <th>Specialisation</th>
+                            <th>Hospital</th>
+                            <th>Location</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctorData">
+                        <!-- Table body will be populated dynamically -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Deadht. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('https://sheetdb.io/api/v1/iipajviztu8s3')
+            .then(response => response.json())
+            .then(data => {
+                const doctorTable = document.getElementById('doctorData');
+                data.forEach(doctor => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${doctor.name}</td>
+                        <td>${doctor.degree}</td>
+                        <td>${doctor.experience}</td>
+                        <td>${doctor.specialisation}</td>
+                        <td>${doctor.hospital}</td>
+                        <td>${doctor.location}</td>
+                        <td>${doctor.latitude}</td>
+                        <td>${doctor.longitude}</td>
+                    `;
+                    doctorTable.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        document.getElementById('checkAvailabilityBtn').addEventListener('click', function() {
+            // Fetch the nearest doctor's data and display availability message
+            fetch('https://sheetdb.io/api/v1/iipajviztu8s3')
+                .then(response => response.json())
+                .then(data => {
+                    const nearestDoctor = findNearestDoctor(data);
+                    const message = `The nearest doctor is ${nearestDoctor.name} and is ${nearestDoctor.distance.toFixed(2)} kilometers away.`;
+                    alert(message);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        function findNearestDoctor(doctors) {
+            const userLatitude = 37.7749; // Example latitude
+            const userLongitude = -122.4194; // Example longitude
+            let nearestDoctor = null;
+            let smallestDistance = Number.MAX_SAFE_INTEGER;
+
+            doctors.forEach(doctor => {
+                const distance = calculateDistance(userLatitude, userLongitude, doctor.latitude, doctor.longitude);
+                if (distance < smallestDistance) {
+                    smallestDistance = distance;
+                    nearestDoctor = { ...doctor, distance };
+                }
+            });
+
+            return nearestDoctor;
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in kilometers
+            const dLat = (lat2 - lat1) * Math.PI / 180; // Convert degrees to radians
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c; // Distance in kilometers
+            return distance;
+        }
+    </script>
+</body>
+</html>
