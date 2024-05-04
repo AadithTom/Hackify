@@ -278,3 +278,100 @@ th {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+
+.header h1 {
+  margin: 0;
+}
+
+/* Navigation tabs styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.tab {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.tab:last-child {
+  margin-right: 0;
+}
+
+/* Green background for the "Map" button */
+.map-tab {
+  background-color: rgb(236, 35, 35);
+}
+
+/* Nearest location container styling */
+#nearestLocation {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Doctor table styling */
+#doctorTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#doctorTable th,
+#doctorTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#doctorTable th {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+#doctorTable tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.check-availability {
+  padding: 10px 20px;
+  background-color: #f23030;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.check-availability {
+  padding: 15px 30px;
+  background-color: #f23030;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.check-availability:hover {
+  background-color: #d32f2f;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2), 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.check-availability:focus {
+  outline: none;
+}
+.availability-button-container {
+  text-align: center; /* Align the button to the center */
+  margin-top: 30px; /* Add some space between the button and the footer content */
+}
+
+
