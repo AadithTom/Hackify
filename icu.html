@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICU Services</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICU Availability</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header class="header">
     <div class="container">
-      <h1>ICU Services</h1>
+      <div class="top-section">
+        <div class="emergency-info">
+          <p class="call-now">Emergency Call Now! <br> +123-456-7890</p>
+        </div>
+        <div class="emergency-info">
+          <p class="availability">Available 24/7</p>
+        </div>
+        <div class="book-doctor-container">
+          <a href="#" class="book-doctor">BOOK A DOCTOR?</a>
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="main">
     <div class="container">
-      <section class="icu-info">
-        <!-- ICU information will be dynamically inserted here -->
-        <div id="icuInfo">
-          <p>Loading ICU information...</p>
-        </div>
+      <section class="icu-availability">
+        <h2>ICU Availability</h2>
+        <table id="icuTable">
+          <thead>
+            <tr>
+              <th>Hospital Name</th>
+              <th>Location</th>
+              <th>ICU</th>
+            </tr>
+          </thead>
+          <tbody id="icuData">
+            <!-- Table body will be populated dynamically -->
+          </tbody>
+        </table>
       </section>
     </div>
   </main>
@@ -30,7 +50,23 @@
     </div>
   </footer>
 
-  <!-- Script for fetching and displaying ICU information -->
-  <script src="script.js"></script>
+  <script>
+    fetch('https://sheetdb.io/api/v1/m2xw75w7wgrd2')
+      .then(response => response.json())
+      .then(data => {
+        const icuTable = document.getElementById('icuData');
+        data.forEach(hospital => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${hospital.name}</td>
+            <td>${hospital.location}</td>
+            <td>${hospital.icu}</td>
+          `;
+          icuTable.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
+
 </body>
 </html>
