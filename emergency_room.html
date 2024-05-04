@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Emergency Rooms</title>
   <link rel="stylesheet" href="style.css">
- 
+</head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="top-section">
-        <!-- Existing emergency info -->
         <div class="emergency-info">
           <p class="call-now">Emergency Call Now! <br> +123-456-7890</p>
         </div>
@@ -31,9 +29,15 @@
       <section class="emergency-rooms">
         <h2>Emergency Rooms</h2>
         <table id="emergencyRoomsTable">
-          
-          <tbody>
-            <!-- Table rows will be populated dynamically -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Location</th>
+              <th>ER</th>
+            </tr>
+          </thead>
+          <tbody id="emergencyRoomsData">
+            <!-- Table body will be populated dynamically -->
           </tbody>
         </table>
       </section>
@@ -45,7 +49,24 @@
       <p>&copy; Deadht. All Rights Reserved.</p>
     </div>
   </footer>
- 
-  
+
+  <script>
+    fetch('https://sheetdb.io/api/v1/m2xw75w7wgrd2')
+      .then(response => response.json())
+      .then(data => {
+        const emergencyRoomsTable = document.getElementById('emergencyRoomsData');
+        data.forEach(room => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${room.name}</td>
+            <td>${room.location}</td>
+            <td>${room.er}</td>
+          `;
+          emergencyRoomsTable.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
+
 </body>
 </html>
