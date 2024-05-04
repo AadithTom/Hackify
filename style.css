@@ -194,3 +194,105 @@ body {
   color: #fff; /* Text color */
   font-size: 24px; /* Adjust font size as needed */
 }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: #29323a;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.logo {
+  flex-grow: 1;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+}
+
+.emergency-info {
+  margin-left: auto;
+}
+
+.emergency-info p {
+  margin: 0;
+  padding: 5px 10px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: #c91e1e;
+}
+
+.emergency-info p.call-now {
+  margin-right: 10px;
+}
+
+.emergency-info p.availability {
+  margin-right: 10px;
+}
+
+.book-doctor-container {
+  margin-left: 20px;
+}
+
+.book-doctor {
+  padding: 10px 20px;
+  background-color: #d82424;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.book-doctor:hover {
+  background-color: #45a049;
+}
+
+.critical-care-transport {
+  margin-top: 30px; /* Adjust margin-top as needed */
+}
+
+.footer {
+  background-color: #29323a;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+/* Existing CSS styles */
+
+.book-transport-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #d82424;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.book-transport-btn:hover {
+  background-color: #45a049;
+}
+
+/* Existing CSS styles */
