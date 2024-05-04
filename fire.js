@@ -16,13 +16,19 @@ const firebaseConfig = {
   measurementId: "G-VJCPVZ74NC"
 };
 
-// Get all documents from a collection
-db.collection("users").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-    });
-  });
+// Get reference to the 'Doctors' collection and the specific document
+const doctorRef = db.collection("Doctors").doc("Doctor1");
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Fetch data from Firestore
+doctorRef.get().then((doc) => {
+    if (doc.exists) {
+        // Display the value of the 'Degree' field
+        const degree = doc.data().Degree;
+        document.getElementById("doctorDetails").innerText = `Doctor1's Degree: ${degree}`;
+    } else {
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
